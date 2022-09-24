@@ -28,6 +28,11 @@ app.get('/', (req, res) => {
   res.render('index', { movie: movieListDataBase.results })
 })
 
+app.get('/:movie_id', (req, res)=>{
+  const movie = movieListDataBase.results.filter(movie => movie.id === Number(req.params.movie_id))
+  res.render('show', {movie: movie[0]})
+})
+
 //啟動&監聽server
 app.listen (port, () => {
   console.log(`Express is running on http://localhost:${port}`)
