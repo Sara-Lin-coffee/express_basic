@@ -11,4 +11,5 @@ You could use capital or lower case to search whatever movie you like. The page 
 
 ## Installation
 clone https://github.com/Sara-Lin-coffee/express_basic.git
+
 npm install
