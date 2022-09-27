@@ -25,13 +25,22 @@ app.use(express.static('public'))
 //傳送response (要顯示在瀏覽器的內容)
 //1.設定route & 回傳內容
 app.get('/', (req, res) => {
-  res.render('index', { movie: movieListDataBase.results })
+  res.render('index', {movie: movieListDataBase.results})
 })
 
-app.get('/:movie_id', (req, res)=>{
+app.get('/search', (req, res) => {
+  const movies = movieListDataBase.results.filter((movie) =>{
+    return movie.title.toLowerCase().includes(req.query.keyword.toLowerCase())
+  })
+  res.render('index', { movie: movies, keyword: req.query.keyword })
+}) 
+
+app.get('/movies/:movie_id', (req, res)=>{
   const movie = movieListDataBase.results.filter(movie => movie.id === Number(req.params.movie_id))
   res.render('show', {movie: movie[0]})
 })
+
+
 
 //啟動&監聽server
 app.listen (port, () => {
